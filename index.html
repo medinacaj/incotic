@@ -1421,8 +1421,7 @@ var io=new IntersectionObserver(function(entries){
     if(!e.isIntersecting)return;
     e.target.classList.add('on');
     /* Animated counter */
-    var mv=e.target.querySelector('.metric-val[data-target]');
-    if(mv)animateCounter(mv);
+    e.target.querySelectorAll('.metric-val[data-target]').forEach(animateCounter);
     io.unobserve(e.target);
   });
 },{threshold:.15});
