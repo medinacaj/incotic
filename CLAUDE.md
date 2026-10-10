@@ -30,7 +30,7 @@ Proyecto: sitio web estático de una sola página (`index.html`) para INCOTIC, e
 - Logo embebido en base64
 - Canvas de partículas + 4 orbes flotantes animados
 - 38+ modales vía `var MD={...}` + `openModal(id)`
-- DIVs: siempre verificar que `<div` count == `</div>` count (debe ser 317–318)
+- DIVs: siempre verificar que `<div` count == `</div>` count (actualmente 318)
 
 ### Secciones (orden)
 1. `#inicio` — Hero
@@ -57,8 +57,8 @@ Proyecto: sitio web estático de una sola página (`index.html`) para INCOTIC, e
 --grey2:    #6e6e73
 --blue:     #2997ff
 --green:    #30d158
---line:     rgba(255,255,255,.08)
---line2:    rgba(255,255,255,.15)
+--line:     rgba(255,255,255,.11)
+--line2:    rgba(255,255,255,.2)
 --W:        1200px
 --r:        16px
 --nav-h:    68px
@@ -72,17 +72,18 @@ Proyecto: sitio web estático de una sola página (`index.html`) para INCOTIC, e
 
 | Selector | font-size | font-weight |
 |---|---|---|
-| `.hero-h1` | `clamp(2.2rem,5.5vw,3.5rem)` | 900 |
+| `.hero-h1` | `clamp(2rem,5.5vw,3.5rem)` | 900 |
 | `.sec-title` | `clamp(1.65rem,2.8vw,2.1rem)` | 800 |
-| `.metric-val` | `clamp(1.3rem,2.5vw,1.75rem)` | 800 |
+| `.metric-val` | `clamp(1.1rem,2.2vw,1.55rem)` | 800 |
 | `.nav-logo` | `1.3rem` | 900 |
 | `.hero-p` | `0.95rem` | 400 |
 | `.sec-sub` | `0.95rem` | 400 |
 | `.btn-primary/secondary` | `0.9rem` | 700/600 |
 | `.meto-body h3` / `.comp-card-header h3` | `0.9rem` | 700 |
 | `.faq-q span` | `0.88rem` | 500 |
-| `.nav-links a` | `0.88rem` | 500 |
-| `.sol-body p` / `.comp-card p` / `.meto-body p` | `0.85rem` | 400 |
+| `.nav-links a` | `0.87rem` | 500 |
+| `.comp-card p` / `.meto-body p` | `0.85rem` | 400 |
+| `.sol-body p` | `0.87rem` | 400 |
 | `.modal-body` | `0.87rem` | 400 |
 | `.sec-tag` | `0.65rem` | 600 uppercase |
 | `.meto-step` | `0.62rem` | 700 uppercase |
@@ -210,7 +211,7 @@ md  ≤ 900px  → footer 2 cols, blobs 280px
 ## Convenciones CRÍTICAS
 
 ### Nunca hacer
-1. **Email en HTML plano** — siempre JS: `var u='contacto',d='incotic.com'`
+1. **Email en HTML plano** (tampoco en JSON-LD ni en textos de modales) — usar la variable global JS `EMAIL`, construida con `var u='contacto',d='incotic.com'`
 2. **Deduplicar CSS con regex automático** — destruye propiedades importantes
 3. **Duplicar reglas CSS** — verificar antes de agregar
 4. **Mezclar selectores** — nunca combinar `.sec-title` con selectores de contenedor
