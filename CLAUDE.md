@@ -246,16 +246,17 @@ Nunca cambiar `display:block` por `display:none` aquí.
 
 ## Pendientes del proyecto
 
-- [ ] Reemplazar `G-XXXXXXXXXX` con Measurement ID real de GA4
+- [ ] Reemplazar `G-XXXXXXXXXX` con Measurement ID real de GA4 (variable `GA_ID`; gtag no se carga mientras sea placeholder)
+- [ ] Confirmar si INCOTIC emite facturas / participa en licitaciones antes de volver a mencionarlo
 - [ ] Actualizar dominio `www.incotic.com` en canonical y og:url
-- [ ] Subir imagen `og-image.jpg` (1200×630px) para preview en redes
+- [x] Crear `og-image.jpg` (1200×630px) — está en la raíz del repo; subirla junto con `index.html` al publicar
 - [ ] Reemplazar testimonios genéricos con reseñas reales de clientes
 - [ ] Agregar fotos reales de proyectos ejecutados
 - [ ] Crear perfil de Google My Business
 - [ ] Configurar headers de caché en servidor (nginx/Apache)
 - [ ] Verificar propiedad en Google Search Console
 - [ ] Enviar sitemap.xml desde Google Search Console
-- [ ] Mover logo de base64 a archivo externo `logo.png`
+- [ ] Mover logo de base64 a archivo externo `logo.png` (archivo ya creado en la raíz; usado por el JSON-LD)
 
 ---
 
