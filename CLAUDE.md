@@ -24,7 +24,11 @@ Proyecto: sitio web estático de una sola página (`index.html`) para INCOTIC, e
 
 ## Arquitectura del archivo
 
-- **Un solo** `index.html` — sin archivos CSS/JS externos propios
+- **Un solo** `index.html` para la portada — sin archivos CSS/JS externos propios
+- Páginas de servicio en `servicios/*.html` (7), con estilos compartidos en `servicios.css`
+  - Publicado en **GitHub Pages** bajo `/incotic/`: usar **rutas relativas** (`../logo.png`, `../index.html#x`), nunca rutas que empiecen con `/`
+  - Al agregar un servicio: crear la página, enlazarla en el footer de `index.html`, en `SERVICE_PAGES` (JS) y en `sitemap.xml`
+- Pruebas: `node tests/smoke.mjs` (corre también en GitHub Actions, workflow "INCOTIC website QA")
 - Font Awesome 6.5.1 desde CDN Cloudflare
 - Google Fonts: Figtree (300–900)
 - Logo embebido en base64
@@ -244,6 +248,7 @@ Nunca cambiar `display:block` por `display:none` aquí.
 
 ## Workflow recomendado antes de modificar
 
+0. Ejecutar `node tests/smoke.mjs` (cubre la mayoría de los puntos siguientes)
 1. Verificar balance de DIVs: `grep -c '<div' index.html` == `grep -c '</div>' index.html`
 2. Buscar selectores huérfanos (sin `{}`)
 3. Evitar regex de deduplicación automática — usar string replacement puntual
