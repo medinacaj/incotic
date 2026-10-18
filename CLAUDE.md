@@ -1,6 +1,6 @@
 # CLAUDE.md — INCOTIC Sitio Web Corporativo
 
-Proyecto: sitio web estático de una sola página (`index.html`) para INCOTIC, empresa de soluciones tecnológicas en Concepción, Chile.
+Proyecto: sitio web estático con portada (`index.html`) y siete páginas de servicios (`servicios/*.html`) para INCOTIC, empresa de soluciones tecnológicas en Concepción, Chile.
 
 ---
 
@@ -24,25 +24,25 @@ Proyecto: sitio web estático de una sola página (`index.html`) para INCOTIC, e
 
 ## Arquitectura del archivo
 
-- **Un solo** `index.html` — sin archivos CSS/JS externos propios
+- Portada `index.html`; estilos `site.css`, lógica `site.js`; páginas independientes `servicios/*.html` y `servicios.css`
 - Font Awesome 6.5.1 desde CDN Cloudflare
 - Google Fonts: Figtree (300–900)
-- Logo embebido en base64
+- Logo externo reutilizable en `logo.png`
 - Canvas de partículas + 4 orbes flotantes animados
 - 38+ modales vía `var MD={...}` + `openModal(id)`
-- DIVs: siempre verificar que `<div` count == `</div>` count (actualmente 318)
+- HTML: ejecutar `node tests/smoke.mjs` y `node --check site.js` antes de publicar
 
-### Secciones (orden)
-1. `#inicio` — Hero
+### Secciones (orden) — portada
+1. `#inicio` — Hero y datos verificables
 2. `#soluciones` — 7 cards
 3. `#por-que` — 6 cards
 4. `#sectores` — 8 cards
 5. `#metodologia` — 4 pasos
-6. `#testimonios` — 3 testimonios
-7. `#compromisos` — 6 cards
-8. `#partners` — pills de marcas
-9. `#faq` — 5 preguntas
-10. `#contacto` — CTA final
+6. `#compromisos` — 6 cards
+7. `#partners` — tecnologías
+8. `#faq` — 5 preguntas accesibles
+9. `#contacto` — CTA final
+No existe sección de testimonios hasta contar con reseñas auténticas.
 
 ---
 
@@ -193,7 +193,7 @@ sm  ≤ 640px  → nav hamburger, canvas opacity .3
 md  ≤ 900px  → footer 2 cols, blobs 280px
 ```
 
-**Regla:** cada cambio CSS en desktop tiene su contraparte en el bloque responsive unificado al final del archivo.
+**Regla:** cada cambio CSS en desktop debe revisarse en las reglas responsive de `site.css`.
 
 ---
 
@@ -236,7 +236,7 @@ Nunca cambiar `display:block` por `display:none` aquí.
 
 ## Workflow recomendado antes de modificar
 
-1. Verificar balance de DIVs: `grep -c '<div' index.html` == `grep -c '</div>' index.html`
+1. Ejecutar `node tests/smoke.mjs` y `node --check site.js`.
 2. Buscar selectores huérfanos (sin `{}`)
 3. Evitar regex de deduplicación automática — usar string replacement puntual
 4. Verificar que `.faq-item.open .faq-a { display:block }` esté presente
@@ -248,15 +248,15 @@ Nunca cambiar `display:block` por `display:none` aquí.
 
 - [ ] Reemplazar `G-XXXXXXXXXX` con Measurement ID real de GA4 (variable `GA_ID`; gtag no se carga mientras sea placeholder)
 - [ ] Confirmar si INCOTIC emite facturas / participa en licitaciones antes de volver a mencionarlo
-- [ ] Actualizar dominio `www.incotic.com` en canonical y og:url
+- [ ] Conectar y verificar dominio corporativo; por ahora canonical y og:url usan `incotic.vercel.app`
 - [x] Crear `og-image.jpg` (1200×630px) — está en la raíz del repo; subirla junto con `index.html` al publicar
-- [ ] Reemplazar testimonios genéricos con reseñas reales de clientes
+- [ ] Agregar reseñas reales con autorización; la sección de testimonios representativos fue retirada
 - [ ] Agregar fotos reales de proyectos ejecutados
 - [ ] Crear perfil de Google My Business
-- [ ] Configurar headers de caché en servidor (nginx/Apache)
+- [x] Configurar caché conservadora y cabeceras HTTP en `vercel.json`; revisar con herramientas externas
 - [ ] Verificar propiedad en Google Search Console
 - [ ] Enviar sitemap.xml desde Google Search Console
-- [ ] Mover logo de base64 a archivo externo `logo.png` (archivo ya creado en la raíz; usado por el JSON-LD)
+- [x] Usar `logo.png` externo en la portada y páginas de servicios
 
 ---
 
@@ -271,3 +271,7 @@ El sitio incluye:
 - `robots.txt` en la raíz
 
 Actualizar canonical y og:url cuando el dominio esté activo.
+
+---
+## Auditoría e implementación de octubre de 2026
+Consulta `QA_IMPLEMENTACION.md` para cambios, verificaciones, pendientes comerciales y restricciones de publicación.
