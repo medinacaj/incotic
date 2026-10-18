@@ -614,3 +614,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
 }
 
 .modal-page-link{display:inline-flex;margin:1rem 0 0;gap:.45rem;align-items:center;color:var(--blue);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+/* Accessible skip-to-content link. */
+.skip-link{position:absolute;left:1rem;top:-6rem;z-index:1000;padding:.7rem 1rem;background:#fff;color:#111;border-radius:8px;text-decoration:none;font-weight:700}
+.skip-link:focus{top:.5rem}
