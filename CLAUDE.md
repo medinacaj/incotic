@@ -67,7 +67,11 @@ Hero: 4 métricas (proyectos, uptime objetivo, garantía, tiempo de respuesta).
 --W:        1200px
 --r:        16px
 --nav-h:    68px
+--shadow / --shadow-hover              sombras en capas para tarjetas oscuras
+--shadow-light / --shadow-light-hover  sombras para tarjetas claras
 ```
+
+**Tarjetas:** todas usan `box-shadow:var(--shadow)` y al hover se elevan con `var(--shadow-hover)` (easing `cubic-bezier(.2,.8,.2,1)`). No usar sombras sueltas: reutilizar los tokens.
 
 **Estilo:** inspirado en Apple.com — oscuro suave (gris azulado), minimalista, espacioso.
 Todas las secciones usan el gradiente oscuro `#0d1117 → #121c2b`.
