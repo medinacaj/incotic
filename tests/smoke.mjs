@@ -15,6 +15,10 @@ function check(label,value){assert.ok(value,label);console.log('✓ '+label);}
 check('HTML opens and closes divs equally',count(html,/<div\b/g)===count(html,/<\/div>/g));
 check('Main landmark and unique H1',count(html,/<main\b/g)===1&&count(html,/<\/main>/g)===1&&count(html,/<h1\b/g)===1);
 check('Only factual service and process metrics',count(html,/class="metric-val"/g)===4);
+check('Compact homepage spacing uses a shared section token',css.includes('--section-space:clamp(2.75rem,4.5vw,4.5rem)')&&css.includes('padding:var(--section-space) 0'));
+check('Hero has no viewport-height floor',css.includes('min-height:0;display:flex;align-items:center')&&!css.includes('min-height:80vh'));
+check('Mobile vertical rhythm has dedicated overrides',css.includes('--section-space:clamp(1.9rem,5vw,2.5rem)')&&css.includes('#inicio{padding-top:calc(var(--nav-h) + 2rem)'));
+check('Service page spacing is responsive',read('servicios.css').includes('padding:clamp(1.8rem,3.2vw,2.5rem)')&&read('servicios.css').includes('.section{padding:1.7rem 0}'));
 check('Fake testimonials removed',!html.includes('id="testimonios"')&&!html.includes('Testimonios representativos'));
 check('Accessible FAQ disclosure buttons',count(html,/id="faq-button-[0-9]+"/g)===5&&count(html,/id="faq-answer-[0-9]+"/g)===5);
 check('All main images have alt text',Array.from(html.matchAll(/<img\b[^>]*>/g)).every(m=>/\balt="/.test(m[0])));
