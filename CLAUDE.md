@@ -70,8 +70,8 @@ Hero: 4 métricas (proyectos, uptime objetivo, garantía, tiempo de respuesta).
 ```
 
 **Estilo:** inspirado en Apple.com — oscuro suave (gris azulado), minimalista, espacioso.
-Secciones claras (`#f4f6f9`): `#por-que` y `#faq`, con reglas propias en el bloque "SECCIONES CLARAS".
-Resto de secciones: gradiente `#0d1117 → #121c2b`.
+Todas las secciones usan el gradiente oscuro `#0d1117 → #121c2b`.
+En `#por-que` y `#faq` solo las **tarjetas** son claras (blancas, texto `#1d1d1f`); bloque "TARJETAS CLARAS". El fondo de la sección no se aclara.
 
 ---
 
