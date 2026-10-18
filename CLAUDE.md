@@ -50,22 +50,24 @@ Hero: 4 métricas (proyectos, uptime objetivo, garantía, tiempo de respuesta).
 ## Paleta y variables CSS
 
 ```
---bg:       #000
---bg2:      #0f0f0f
---bg3:      #1a1a1a
+--bg:       #0d1117
+--bg2:      #111720
+--bg3:      #1b222d
 --white:    #f5f5f7
---grey:     #a1a1a6
+--grey:     #b4b9c2
 --grey2:    #8e8e93   (cumple contraste AA sobre negro)
 --blue:     #2997ff
 --green:    #30d158
---line:     rgba(255,255,255,.11)
---line2:    rgba(255,255,255,.2)
+--line:     rgba(255,255,255,.14)
+--line2:    rgba(255,255,255,.24)
 --W:        1200px
 --r:        16px
 --nav-h:    68px
 ```
 
-**Estilo:** inspirado en Apple.com — oscuro, minimalista, espacioso.
+**Estilo:** inspirado en Apple.com — oscuro suave (gris azulado), minimalista, espacioso.
+Secciones claras (`#f4f6f9`): `#por-que` y `#faq`, con reglas propias en el bloque "SECCIONES CLARAS".
+Resto de secciones: gradiente `#0d1117 → #121c2b`.
 
 ---
 
@@ -199,7 +201,7 @@ md  ≤ 900px  → footer 2 cols, blobs 280px
 
 **Orden de los bloques:** md (≤900) → sm (≤640) → xs (≤400). El más pequeño va al final para que prevalezca; invertirlo rompe el layout móvil.
 
-**Blobs:** la opacidad efectiva es `var(--op) * .3` (definido en `.sec-blob`). Mantenerlos sutiles.
+**Blobs:** la opacidad efectiva es `var(--op) * .5` (definido en `.sec-blob`). Mantenerlos sutiles.
 
 ---
 
