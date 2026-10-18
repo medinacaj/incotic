@@ -69,7 +69,7 @@ window.trackEvent=function(a,c,l){gtag('event',a,{event_category:c,event_label:l
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#000;--bg2:#0f0f0f;--bg3:#1a1a1a;
-  --white:#f5f5f7;--grey:#a1a1a6;--grey2:#6e6e73;
+  --white:#f5f5f7;--grey:#a1a1a6;--grey2:#8e8e93;
   --line:rgba(255,255,255,.11);--line2:rgba(255,255,255,.2);
   --blue:#2997ff;--green:#30d158;
   --W:1200px;--r:16px;--nav-h:68px;
@@ -131,7 +131,7 @@ section{position:relative;z-index:1;padding:clamp(3.5rem,7vw,6rem) 0;overflow:hi
   position:absolute;border-radius:50%;pointer-events:none;z-index:0;
   animation:blobFloat var(--dur,9s) ease-in-out infinite;
   animation-delay:var(--delay,0s);
-  filter:blur(var(--blur,55px));opacity:var(--op,.4);
+  filter:blur(var(--blur,55px));opacity:calc(var(--op,.4) * .3);
   width:var(--w,300px);height:var(--w,300px);
   background:var(--clr,var(--blue));
   top:var(--t,auto);left:var(--l,auto);right:var(--ri,auto);bottom:var(--bo,auto);
@@ -244,7 +244,7 @@ nav.scrolled{background:rgba(0,0,0,.9)}
 }
 .btn-secondary:hover{border-color:rgba(255,255,255,.38);background:rgba(255,255,255,.05)}
 .hero-metrics{
-  display:grid;grid-template-columns:repeat(6,1fr);
+  display:grid;grid-template-columns:repeat(4,1fr);
   gap:1px;background:var(--line);
   border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
 }
@@ -286,26 +286,10 @@ nav.scrolled{background:rgba(0,0,0,.9)}
 }
 .sol-body{padding:1.1rem 1.2rem 1.3rem}
 .sol-body p{font-size:.87rem;font-weight:400;color:var(--grey);line-height:1.7}
+.sol-points{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem;padding-right:1.6rem}
+.sol-points li{font-size:.72rem;font-weight:500;color:var(--white);background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:20px;padding:.22rem .6rem}
 
-/* ── POR QUÉ ELEGIRNOS ── */
-.pq-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:1.1rem;
-}
-.pq-card{
-  background:var(--bg3);border-radius:var(--r);padding:1.4rem;
-  border:1px solid var(--line);
-  transition:border-color .3s,transform .3s;
-  position:relative;overflow:hidden;
-}
-.pq-card:hover{border-color:var(--c,var(--blue));transform:translateY(-3px)}
-.pq-icon{
-  width:40px;height:40px;border-radius:10px;
-  background:rgba(255,255,255,.07);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1rem;color:var(--c,var(--blue));margin-bottom:.85rem;
-}
-.pq-card h3{font-size:.9rem;font-weight:700;margin-bottom:.32rem}
-.pq-card p{font-size:.85rem;font-weight:400;color:var(--grey);line-height:1.68}
+/* ── POR QUÉ INCOTIC (usa .comp-*) ── */
 
 /* ── SECTORES ── */
 #sectores{background:linear-gradient(160deg,#000 0%,rgba(48,209,88,.07) 50%,#000 100%)}
@@ -393,7 +377,6 @@ nav.scrolled{background:rgba(0,0,0,.9)}
 .testi-disclaimer{font-size:.72rem;color:var(--grey2);text-align:center;font-style:italic;margin-top:.3rem}
 
 /* ── COMPROMISOS ── */
-#compromisos{background:linear-gradient(160deg,#05000d 0%,rgba(191,90,242,.08) 50%,#05000d 100%)}
 .comp-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:1.1rem;
 }
@@ -617,20 +600,25 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
 }
 
 /* ════════════════════════════════════════════════
-   RESPONSIVE — mobile-first, un bloque por breakpoint
+   RESPONSIVE — un bloque por breakpoint, de mayor a menor (md → sm → xs)
+   para que el breakpoint más pequeño prevalezca
 ════════════════════════════════════════════════ */
 
-/* xs ≤ 400px */
-@media(max-width:400px){
-  .hero-metrics{grid-template-columns:repeat(3,1fr)}
-  .sec-blob{--w:140px!important;--blur:22px!important;--op:.2!important}
+/* md ≤ 900px */
+@media(max-width:900px){
+  .footer-grid{grid-template-columns:1fr 1fr;row-gap:2rem}
+  .footer-brand{grid-column:1/-1}
+  .footer-brand p{max-width:100%}
+  .solutions-grid{grid-template-columns:repeat(2,1fr)}
+  .sectors-grid{grid-template-columns:repeat(2,1fr)}
+  .sec-blob{--w:260px!important;--blur:36px!important;--op:.34!important}
 }
 
 /* sm ≤ 640px */
 @media(max-width:640px){
   .nav-links{display:none}
   .nav-toggle{display:flex}
-  .hero-metrics{grid-template-columns:repeat(3,1fr)}
+  .hero-metrics{grid-template-columns:repeat(2,1fr)}
   .footer-grid{grid-template-columns:1fr}
   .footer-bottom{flex-direction:column;align-items:flex-start}
   .footer-bottom-links{gap:.7rem}
@@ -647,14 +635,10 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
   .partner-pill{padding:.44rem .82rem;font-size:.79rem}
 }
 
-/* md ≤ 900px */
-@media(max-width:900px){
-  .footer-grid{grid-template-columns:1fr 1fr;row-gap:2rem}
-  .footer-brand{grid-column:1/-1}
-  .footer-brand p{max-width:100%}
-  .solutions-grid{grid-template-columns:repeat(2,1fr)}
-  .sectors-grid{grid-template-columns:repeat(2,1fr)}
-  .sec-blob{--w:260px!important;--blur:36px!important;--op:.34!important}
+/* xs ≤ 400px */
+@media(max-width:400px){
+  .hero-metrics{grid-template-columns:repeat(2,1fr)}
+  .sec-blob{--w:140px!important;--blur:22px!important;--op:.2!important}
 }
 
 /* foco de teclado */
@@ -689,7 +673,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
     <a href="#inicio" class="nav-logo"><img src="data:image/png;base64,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" alt="INCOTIC" class="nav-logo-img">INCOTIC</a>
     <ul class="nav-links">
       <li><a href="#soluciones">Soluciones</a></li>
-      <li><a href="#por-que">Nosotros</a></li>
+      <li><a href="#por-que">Por qué INCOTIC</a></li>
       <li><a href="#sectores">Sectores</a></li>
       <li><a href="#metodologia">Metodología</a></li>
       <li><a href="#testimonios">Clientes</a></li>
@@ -705,7 +689,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
 <!-- Mobile menu -->
 <div class="nav-mobile" id="navMobile">
   <a href="#soluciones" onclick="closeMobile()">Soluciones</a>
-  <a href="#por-que" onclick="closeMobile()">Nosotros</a>
+  <a href="#por-que" onclick="closeMobile()">Por qué INCOTIC</a>
   <a href="#sectores" onclick="closeMobile()">Sectores</a>
   <a href="#metodologia" onclick="closeMobile()">Metodología</a>
   <a href="#testimonios" onclick="closeMobile()">Clientes</a>
@@ -742,14 +726,8 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
           <div class="metric-val" data-target="99.9" data-suffix="%">0%</div>
           <div class="metric-lbl">Uptime objetivo</div>
         </div>
-        <div class="metric">
-          <div class="metric-val">24/7</div>
-          <div class="metric-lbl">Monitoreo continuo</div>
-        </div>
-        <div class="metric">
-          <div class="metric-val" data-target="7">0</div>
-          <div class="metric-lbl">Áreas de solución</div>
-        </div>
+        
+        
         <div class="metric">
           <div class="metric-val" data-target="90" data-suffix=" días">0</div>
           <div class="metric-lbl">Garantía de mano de obra</div>
@@ -789,6 +767,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
         </div>
         <div class="sol-body">
           <p>Servidores, almacenamiento y respaldo con alta disponibilidad.</p>
+          <ul class="sol-points"><li>Servidores y virtualización</li><li>Respaldo 3-2-1</li><li>Nube híbrida</li></ul>
         </div>
       </div>
 
@@ -803,6 +782,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
         </div>
         <div class="sol-body">
           <p>Redes cableadas e inalámbricas, seguras y de alto rendimiento.</p>
+          <ul class="sol-points"><li>WiFi empresarial</li><li>VLANs y seguridad</li><li>Enlaces redundantes</li></ul>
         </div>
       </div>
 
@@ -817,6 +797,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
         </div>
         <div class="sol-body">
           <p>CCTV, control de acceso y monitoreo 24/7.</p>
+          <ul class="sol-points"><li>Cámaras IP 4K</li><li>Control de acceso</li><li>Analítica con IA</li></ul>
         </div>
       </div>
 
@@ -831,6 +812,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
         </div>
         <div class="sol-body">
           <p>Automatiza procesos, reduce errores y gana eficiencia.</p>
+          <ul class="sol-points"><li>Procesos y RPA</li><li>Integración ERP/CRM</li><li>IoT industrial</li></ul>
         </div>
       </div>
 
@@ -845,6 +827,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
         </div>
         <div class="sol-body">
           <p>Iluminación, clima y accesos controlados desde tu teléfono.</p>
+          <ul class="sol-points"><li>Iluminación y clima</li><li>KNX · Home Assistant</li><li>Control por voz</li></ul>
         </div>
       </div>
 
@@ -859,6 +842,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
         </div>
         <div class="sol-body">
           <p>Visión computacional, analítica predictiva y automatización inteligente.</p>
+          <ul class="sol-points"><li>Visión computacional</li><li>Analítica predictiva</li><li>Bots y OCR</li></ul>
         </div>
       </div>
 
@@ -873,6 +857,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
         </div>
         <div class="sol-body">
           <p>Soporte técnico, equipos, gestión TI y helpdesk para tu empresa.</p>
+          <ul class="sol-points"><li>Soporte y helpdesk</li><li>Equipos y periféricos</li><li>Microsoft 365</li></ul>
         </div>
       </div>
 
@@ -891,36 +876,36 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
       <div class="sec-tag">Nuestra diferencia</div>
       <h2 class="sec-title">Por qué elegir <em>INCOTIC.</em></h2>
     </div>
-    <div class="pq-grid">
-      <div class="pq-card rv">
-        <div class="pq-icon" style="--c:#2997ff"><i class="fas fa-map-marker-alt"></i></div>
-        <h3>Locales y disponibles</h3>
-        <p>Estamos en Concepción. Cuando algo falla, llegamos. Sin call centers ni soporte offshore.</p>
+    <div class="comp-grid">
+      <div class="comp-card rv" style="--c:#2997ff" onclick="openModal('c-integral')">
+        <div class="comp-card-header"><div class="comp-icon"><i class="fas fa-layer-group"></i></div><h3>Todo en un solo proveedor</h3></div>
+        <p>Redes, seguridad, servidores, domótica e IA sin coordinar varias empresas.</p>
+        <div class="card-plus"><i class="fas fa-plus"></i></div>
       </div>
-      <div class="pq-card rv">
-        <div class="pq-icon" style="--c:#30d158"><i class="fas fa-layer-group"></i></div>
-        <h3>Todo en un solo proveedor</h3>
-        <p>Redes, seguridad, servidores, domótica e IA. Sin coordinar múltiples empresas para un solo proyecto.</p>
+      <div class="comp-card rv" style="--c:#30d158" onclick="openModal('c-atencion')">
+        <div class="comp-card-header"><div class="comp-icon"><i class="fas fa-map-marker-alt"></i></div><h3>Atención local y personalizada</h3></div>
+        <p>Estamos en Concepción. Hablas con quien conoce tu proyecto, no con un call center.</p>
+        <div class="card-plus"><i class="fas fa-plus"></i></div>
       </div>
-      <div class="pq-card rv">
-        <div class="pq-icon" style="--c:#ff9f0a"><i class="fas fa-shield-halved"></i></div>
-        <h3>Enfoque preventivo real</h3>
-        <p>Monitoreamos antes de que llames. El objetivo es que nunca tengas que reportar un problema.</p>
+      <div class="comp-card rv" style="--c:#ff9f0a" onclick="openModal('c-acompanamiento')">
+        <div class="comp-card-header"><div class="comp-icon"><i class="fas fa-handshake"></i></div><h3>Acompañamiento y garantía</h3></div>
+        <p>90 días de garantía de mano de obra. No desaparecemos tras la instalación.</p>
+        <div class="card-plus"><i class="fas fa-plus"></i></div>
       </div>
-      <div class="pq-card rv">
-        <div class="pq-icon" style="--c:#bf5af2"><i class="fas fa-file-invoice"></i></div>
-        <h3>Trabajo formal</h3>
-        <p>Propuesta por escrito, cronograma acordado y documentación completa al cierre de cada proyecto.</p>
+      <div class="comp-card rv" style="--c:#ff6b6b" onclick="openModal('c-tiempos')">
+        <div class="comp-card-header"><div class="comp-icon"><i class="fas fa-calendar-check"></i></div><h3>Tiempos claros</h3></div>
+        <p>Cronograma acordado por escrito y aviso inmediato ante cualquier cambio.</p>
+        <div class="card-plus"><i class="fas fa-plus"></i></div>
       </div>
-      <div class="pq-card rv">
-        <div class="pq-icon" style="--c:#ff6b6b"><i class="fas fa-headset"></i></div>
-        <h3>Soporte post-venta incluido</h3>
-        <p>90 días de garantía de mano de obra en cada proyecto. No desaparecemos tras la instalación.</p>
+      <div class="comp-card rv" style="--c:#bf5af2" onclick="openModal('c-preventivo')">
+        <div class="comp-card-header"><div class="comp-icon"><i class="fas fa-shield-halved"></i></div><h3>Enfoque preventivo</h3></div>
+        <p>Monitoreamos y resolvemos problemas antes de que afecten tu operación.</p>
+        <div class="card-plus"><i class="fas fa-plus"></i></div>
       </div>
-      <div class="pq-card rv">
-        <div class="pq-icon" style="--c:#64d2ff"><i class="fas fa-certificate"></i></div>
-        <h3>Marcas líderes</h3>
-        <p>Trabajamos con equipos Cisco, Hikvision, Ubiquiti, Huawei y marcas líderes con garantía de fabricante.</p>
+      <div class="comp-card rv" style="--c:#64d2ff" onclick="openModal('c-documentacion')">
+        <div class="comp-card-header"><div class="comp-icon"><i class="fas fa-file-lines"></i></div><h3>Documentación completa</h3></div>
+        <p>Planos, configuraciones y manuales al cierre de cada proyecto.</p>
+        <div class="card-plus"><i class="fas fa-plus"></i></div>
       </div>
     </div>
   </div>
@@ -1118,49 +1103,6 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
 </section>
 
 <!-- ════════════════════════════════
-     COMPROMISOS
-════════════════════════════════ -->
-<section id="compromisos">
-  <div class="sec-blob" style="--clr:#bf5af2;--w:650px;--t:-80px;--ri:-80px;--blur:50px;--op:.54;--dur:13s"></div>
-  <div class="sec-blob" style="--clr:#2997ff;--w:487px;--bo:-70px;--l:-50px;--blur:42px;--op:.50;--dur:9s;--delay:-5s"></div>
-  <div class="sec-blob" style="--clr:#30d158;--w:357px;--t:35%;--l:45%;--blur:35px;--op:.44;--dur:11s;--delay:-8s"></div>
-  <div class="container">
-    <div class="sec-header rv">
-      <div class="sec-tag">Nuestros valores</div>
-      <h2 class="sec-title">Lo que nos <em>define.</em></h2>
-      
-    </div>
-    <div class="comp-grid">
-      <div class="comp-card rv" style="--c:#2997ff" onclick="openModal('c-atencion')">
-        <div class="comp-card-header"><div class="comp-icon"><i class="fas fa-user-tie"></i></div><h3>Atención Personalizada</h3></div>
-        <p>Un consultor dedicado que entiende tu negocio antes de proponer.</p>
-        <div class="card-plus"><i class="fas fa-plus"></i></div>
-      </div><div class="comp-card rv" style="--c:#30d158" onclick="openModal('c-confidencialidad')">
-        <div class="comp-card-header"><div class="comp-icon"><i class="fas fa-lock"></i></div><h3>Confidencialidad</h3></div>
-        <p>Tus datos y los de tu empresa, siempre protegidos.</p>
-        <div class="card-plus"><i class="fas fa-plus"></i></div>
-      </div><div class="comp-card rv" style="--c:#ff9f0a" onclick="openModal('c-acompanamiento')">
-        <div class="comp-card-header"><div class="comp-icon"><i class="fas fa-handshake"></i></div><h3>Acompañamiento</h3></div>
-        <p>Estamos contigo antes, durante y después de cada proyecto.</p>
-        <div class="card-plus"><i class="fas fa-plus"></i></div>
-      </div><div class="comp-card rv" style="--c:#ff6b6b" onclick="openModal('c-tiempos')">
-        <div class="comp-card-header"><div class="comp-icon"><i class="fas fa-calendar-check"></i></div><h3>Tiempos Claros</h3></div>
-        <p>Fechas definidas, cumplidas y comunicación transparente.</p>
-        <div class="card-plus"><i class="fas fa-plus"></i></div>
-      </div><div class="comp-card rv" style="--c:#bf5af2" onclick="openModal('c-preventivo')">
-        <div class="comp-card-header"><div class="comp-icon"><i class="fas fa-shield-halved"></i></div><h3>Enfoque Preventivo</h3></div>
-        <p>Detectamos y resolvemos problemas antes de que te afecten.</p>
-        <div class="card-plus"><i class="fas fa-plus"></i></div>
-      </div><div class="comp-card rv" style="--c:#64d2ff" onclick="openModal('c-documentacion')">
-        <div class="comp-card-header"><div class="comp-icon"><i class="fas fa-file-lines"></i></div><h3>Documentación Completa</h3></div>
-        <p>Planos, configuraciones y manuales al cierre de cada proyecto.</p>
-        <div class="card-plus"><i class="fas fa-plus"></i></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════
      PARTNERS / MARCAS
 ════════════════════════════════ -->
 <section id="partners" style="background:var(--bg2)">
@@ -1333,7 +1275,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
         <h4>Empresa</h4>
         <ul>
           <li><a href="#metodologia">Metodología</a></li>
-          <li><a href="#compromisos">Compromisos</a></li>
+          <li><a href="#por-que">Por qué INCOTIC</a></li>
           <li><a href="#partners">Tecnologías</a></li>
           <li><a href="#faq">Preguntas Frecuentes</a></li>
           <li><a href="javascript:void(0)" onclick="openModal('tyc')">Términos y Condiciones</a></li>
@@ -1583,8 +1525,8 @@ var MD={
 'm-diagnostico':{icon:'fas fa-search',title:'Paso 1 — Diagnóstico',body:'<h3>¿Qué evaluamos?</h3><p>Antes de proponer cualquier solución, analizamos en profundidad tu infraestructura tecnológica actual: equipos, red, software, seguridad y procesos. Identificamos brechas, riesgos y oportunidades de mejora con una visión 360°.</p><h3>¿Cómo lo hacemos?</h3><ul><li>Reunión inicial de levantamiento de información (sin costo)</li><li>Revisión de infraestructura existente en terreno o de forma remota</li><li>Entrevistas con el personal técnico y operacional del cliente</li><li>Informe de diagnóstico con hallazgos y recomendaciones prioritarias</li></ul><h3>Resultado</h3><p>Un informe técnico claro que establece el punto de partida y justifica cada decisión de la propuesta posterior.</p><div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08)"><a href="https://wa.me/56973828553?text=Hola%2C+quisiera+agendar+un+Diagn%C3%B3stico+T%C3%A9cnico+sin+costo." target="_blank" rel="noopener" onclick="trackEvent(\'click\',\'contacto\',\'whatsapp_modal_m-diagnostico\')" style="display:inline-flex;align-items:center;gap:.5rem;background:#25d366;color:#fff;padding:.6rem 1.2rem;border-radius:24px;font-size:.85rem;font-weight:700;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:1rem"></i> Cotizar por WhatsApp</a></div>'},
 'm-diseno':{icon:'fas fa-drafting-compass',title:'Paso 2 — Diseño',body:'<h3>De los hallazgos a la solución</h3><p>Con el diagnóstico en mano, diseñamos una arquitectura técnica a medida que resuelve los problemas identificados dentro de tu presupuesto y plazos reales.</p><h3>¿Qué incluye la propuesta?</h3><ul><li>Diagrama de topología de red o sistema propuesto</li><li>Especificación técnica de equipos y software seleccionados</li><li>Cronograma de implementación con hitos claros</li><li>Presupuesto detallado con alternativas si corresponde</li><li>KPIs de éxito del proyecto</li></ul><h3>Resultado</h3><p>Una propuesta técnica y comercial firmada por ambas partes, que es el documento rector de todo el proyecto.</p><div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08)"><a href="https://wa.me/56973828553?text=Hola%2C+quisiera+solicitar+una+propuesta+t%C3%A9cnica+para+mi+proyecto." target="_blank" rel="noopener" onclick="trackEvent(\'click\',\'contacto\',\'whatsapp_modal_m-diseno\')" style="display:inline-flex;align-items:center;gap:.5rem;background:#25d366;color:#fff;padding:.6rem 1.2rem;border-radius:24px;font-size:.85rem;font-weight:700;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:1rem"></i> Cotizar por WhatsApp</a></div>'},
 'm-implementacion':{icon:'fas fa-tools',title:'Paso 3 — Implementación',body:'<h3>Ejecución profesional, sin sorpresas</h3><p>Ejecutamos el proyecto con técnicos certificados, siguiendo el cronograma acordado y minimizando el impacto en tu operación diaria.</p><h3>Buenas prácticas que aplicamos</h3><ul><li>Coordinación previa con tu equipo para planificar ventanas de trabajo</li><li>Instalación limpia y ordenada, con canalización y etiquetado correcto</li><li>Pruebas de funcionamiento en cada etapa antes de avanzar</li><li>Actualización de firmware y configuración de seguridad desde el inicio</li><li>Documentación de lo instalado en tiempo real</li></ul><h3>Resultado</h3><p>Sistema funcionando según especificaciones, probado, documentado y entregado formalmente con acta de recepción.</p><div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08)"><a href="https://wa.me/56973828553?text=Hola%2C+me+interesa+conocer+su+proceso+de+implementaci%C3%B3n." target="_blank" rel="noopener" onclick="trackEvent(\'click\',\'contacto\',\'whatsapp_modal_m-implementacion\')" style="display:inline-flex;align-items:center;gap:.5rem;background:#25d366;color:#fff;padding:.6rem 1.2rem;border-radius:24px;font-size:.85rem;font-weight:700;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:1rem"></i> Cotizar por WhatsApp</a></div>'},
-'m-monitoreo':{icon:'fas fa-chart-line',title:'Paso 4 — Monitoreo y Soporte',body:'<h3>El proyecto no termina en la instalación</h3><p>Una vez entregado el proyecto, iniciamos la fase de monitoreo y soporte continuo para garantizar que todo funcione de forma óptima a largo plazo.</p><h3>¿Qué incluye el monitoreo?</h3><ul><li>Supervisión 24/7 de infraestructura crítica con alertas automáticas</li><li>Revisiones periódicas de salud del sistema</li><li>Actualizaciones de firmware y parches de seguridad programados</li><li>Atención de incidentes con tiempos de respuesta definidos (SLA)</li><li>Informes mensuales de estado y rendimiento</li></ul><h3>Planes disponibles</h3><p>Desde soporte básico por incidentes hasta contratos de mantención integral con visitas presenciales incluidas. Adaptamos el plan a tu presupuesto y nivel de criticidad.</p><div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08)"><a href="https://wa.me/56973828553?text=Hola%2C+quisiera+informaci%C3%B3n+sobre+planes+de+monitoreo+y+mant%C3%A9nci%C3%B3n." target="_blank" rel="noopener" onclick="trackEvent(\'click\',\'contacto\',\'whatsapp_modal_m-monitoreo\')" style="display:inline-flex;align-items:center;gap:.5rem;background:#25d366;color:#fff;padding:.6rem 1.2rem;border-radius:24px;font-size:.85rem;font-weight:700;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:1rem"></i> Cotizar por WhatsApp</a></div>'},'c-atencion':{icon:'fas fa-user-tie',title:'Atención Personalizada',body:'<h3>Tu proyecto, nuestra prioridad</h3><p>Desde el primer contacto asignamos un consultor dedicado a tu cuenta. Nos tomamos el tiempo necesario para entender tu negocio, tus procesos y tus dolores antes de proponer cualquier solución.</p><h3>¿Qué incluye?</h3><ul><li>Reunión de diagnóstico sin costo</li><li>Propuesta técnica adaptada a tu realidad</li><li>Canal de comunicación directo con tu consultor</li><li>Seguimiento activo durante toda la ejecución</li></ul><h3>Nuestro compromiso</h3><p>No somos un call center. Cuando nos llamas, hablas con la persona que conoce tu proyecto.</p><div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08)"><a href="https://wa.me/56973828553?text=Hola%2C+quisiera+hablar+con+un+consultor+sobre+mis+necesidades." target="_blank" rel="noopener" onclick="trackEvent(\'click\',\'contacto\',\'whatsapp_modal_c-atencion\')" style="display:inline-flex;align-items:center;gap:.5rem;background:#25d366;color:#fff;padding:.6rem 1.2rem;border-radius:24px;font-size:.85rem;font-weight:700;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:1rem"></i> Cotizar por WhatsApp</a></div>'},
-'c-confidencialidad':{icon:'fas fa-lock',title:'Confidencialidad',body:'<h3>Tu información está segura con nosotros</h3><p>Toda la información que compartes con INCOTIC —credenciales, arquitecturas de red, datos de clientes, procesos internos— es tratada con estricta confidencialidad y nunca será divulgada a terceros.</p><h3>Medidas que aplicamos</h3><ul><li>Firma de NDA (Acuerdo de Confidencialidad) disponible para cada proyecto</li><li>Acceso restringido a la información según rol del técnico</li><li>Eliminación segura de credenciales tras finalizar el proyecto</li><li>Cumplimiento de la Ley N° 19.628 de Protección de Datos</li></ul><h3>Vigencia</h3><p>La obligación de confidencialidad se mantiene por 5 años después de terminado el contrato.</p><div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08)"><a href="https://wa.me/56973828553?text=Hola%2C+quisiera+conversar+sobre+un+proyecto+con+acuerdo+de+confidencialidad." target="_blank" rel="noopener" onclick="trackEvent(\'click\',\'contacto\',\'whatsapp_modal_c-confidencialidad\')" style="display:inline-flex;align-items:center;gap:.5rem;background:#25d366;color:#fff;padding:.6rem 1.2rem;border-radius:24px;font-size:.85rem;font-weight:700;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:1rem"></i> Cotizar por WhatsApp</a></div>'},
+'m-monitoreo':{icon:'fas fa-chart-line',title:'Paso 4 — Monitoreo y Soporte',body:'<h3>El proyecto no termina en la instalación</h3><p>Una vez entregado el proyecto, iniciamos la fase de monitoreo y soporte continuo para garantizar que todo funcione de forma óptima a largo plazo.</p><h3>¿Qué incluye el monitoreo?</h3><ul><li>Supervisión 24/7 de infraestructura crítica con alertas automáticas</li><li>Revisiones periódicas de salud del sistema</li><li>Actualizaciones de firmware y parches de seguridad programados</li><li>Atención de incidentes con tiempos de respuesta definidos (SLA)</li><li>Informes mensuales de estado y rendimiento</li></ul><h3>Planes disponibles</h3><p>Desde soporte básico por incidentes hasta contratos de mantención integral con visitas presenciales incluidas. Adaptamos el plan a tu presupuesto y nivel de criticidad.</p><div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08)"><a href="https://wa.me/56973828553?text=Hola%2C+quisiera+informaci%C3%B3n+sobre+planes+de+monitoreo+y+mant%C3%A9nci%C3%B3n." target="_blank" rel="noopener" onclick="trackEvent(\'click\',\'contacto\',\'whatsapp_modal_m-monitoreo\')" style="display:inline-flex;align-items:center;gap:.5rem;background:#25d366;color:#fff;padding:.6rem 1.2rem;border-radius:24px;font-size:.85rem;font-weight:700;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:1rem"></i> Cotizar por WhatsApp</a></div>'},'c-atencion':{icon:'fas fa-user-tie',title:'Atención Personalizada',body:'<h3>Tu proyecto, nuestra prioridad</h3><p>Desde el primer contacto asignamos un consultor dedicado a tu cuenta. Nos tomamos el tiempo necesario para entender tu negocio, tus procesos y tus dolores antes de proponer cualquier solución.</p><h3>¿Qué incluye?</h3><ul><li>Reunión de diagnóstico sin costo</li><li>Propuesta técnica adaptada a tu realidad</li><li>Canal de comunicación directo con tu consultor</li><li>Seguimiento activo durante toda la ejecución</li></ul><h3>Nuestro compromiso</h3><p>No somos un call center. Cuando nos llamas, hablas con la persona que conoce tu proyecto.</p><h3>Confidencialidad</h3><p>Credenciales, arquitecturas de red y datos de tu empresa se tratan con estricta reserva, conforme a la Ley N° 19.628. Firmamos NDA si tu proyecto lo requiere.</p><div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08)"><a href="https://wa.me/56973828553?text=Hola%2C+quisiera+hablar+con+un+consultor+sobre+mis+necesidades." target="_blank" rel="noopener" onclick="trackEvent(\'click\',\'contacto\',\'whatsapp_modal_c-atencion\')" style="display:inline-flex;align-items:center;gap:.5rem;background:#25d366;color:#fff;padding:.6rem 1.2rem;border-radius:24px;font-size:.85rem;font-weight:700;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:1rem"></i> Cotizar por WhatsApp</a></div>'},
+'c-integral':{icon:'fas fa-layer-group',title:'Todo en un Solo Proveedor',body:'<h3>Un solo interlocutor para toda tu tecnología</h3><p>Redes, cámaras, servidores, soporte informático, domótica e IA bajo un mismo equipo. Sin coordinar a varios proveedores ni buscar culpables cuando algo falla.</p><h3>Ventajas</h3><ul><li>Diseño integrado: cada sistema pensado para funcionar con los demás</li><li>Un solo contrato de soporte y un solo punto de contacto</li><li>Menos tiempos muertos entre especialidades</li><li>Visión completa de tu infraestructura para planificar el crecimiento</li></ul><div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08)"><a href="https://wa.me/56973828553?text=Hola%2C+quisiera+un+solo+proveedor+para+la+tecnolog%C3%ADa+de+mi+empresa." target="_blank" rel="noopener" onclick="trackEvent(\'click\',\'contacto\',\'whatsapp_modal_c-integral\')" style="display:inline-flex;align-items:center;gap:.5rem;background:#25d366;color:#fff;padding:.6rem 1.2rem;border-radius:24px;font-size:.85rem;font-weight:700;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:1rem"></i> Cotizar por WhatsApp</a></div>'},
 'c-acompanamiento':{icon:'fas fa-handshake',title:'Acompañamiento Continuo',body:'<h3>No desaparecemos tras la instalación</h3><p>Muchos proveedores entregan el proyecto y se van. En INCOTIC somos tu aliado tecnológico a largo plazo. Estamos disponibles cuando algo falla, cuando tu empresa crece o cuando necesitas evolucionar tu infraestructura.</p><h3>Formas de acompañamiento</h3><ul><li><strong>Soporte reactivo:</strong> atención ante fallas o incidentes</li><li><strong>Soporte proactivo:</strong> revisiones periódicas antes de que ocurran problemas</li><li><strong>Consultoría continua:</strong> te asesoramos cuando quieres crecer o cambiar</li><li><strong>Capacitación:</strong> enseñamos a tu equipo a usar y mantener los sistemas</li></ul><div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08)"><a href="https://wa.me/56973828553?text=Hola%2C+me+interesa+un+contrato+de+soporte+y+acompa%C3%B1amiento." target="_blank" rel="noopener" onclick="trackEvent(\'click\',\'contacto\',\'whatsapp_modal_c-acompanamiento\')" style="display:inline-flex;align-items:center;gap:.5rem;background:#25d366;color:#fff;padding:.6rem 1.2rem;border-radius:24px;font-size:.85rem;font-weight:700;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:1rem"></i> Cotizar por WhatsApp</a></div>'},
 'c-tiempos':{icon:'fas fa-calendar-check',title:'Tiempos Claros',body:'<h3>Comprometemos fechas y las cumplimos</h3><p>Antes de comenzar cualquier proyecto entregamos un cronograma detallado con hitos, entregables y fechas. Si algo cambia, te avisamos de inmediato con una explicación y una nueva fecha comprometida.</p><h3>Nuestro proceso</h3><ul><li>Cronograma acordado y firmado antes de comenzar</li><li>Actualizaciones de avance semanales o por hito</li><li>Notificación proactiva ante cualquier imprevisto</li><li>Acta de recepción formal al cierre del proyecto</li></ul><h3>Transparencia total</h3><p>Nunca dejamos a un cliente sin respuesta. Si hay un problema, lo comunicamos antes de que tengas que preguntarnos.</p><div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08)"><a href="https://wa.me/56973828553?text=Hola%2C+quisiera+cotizar+un+proyecto+con+cronograma+definido." target="_blank" rel="noopener" onclick="trackEvent(\'click\',\'contacto\',\'whatsapp_modal_c-tiempos\')" style="display:inline-flex;align-items:center;gap:.5rem;background:#25d366;color:#fff;padding:.6rem 1.2rem;border-radius:24px;font-size:.85rem;font-weight:700;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:1rem"></i> Cotizar por WhatsApp</a></div>'},
 'c-preventivo':{icon:'fas fa-shield-halved',title:'Enfoque Preventivo',body:'<h3>Resolvemos problemas antes de que ocurran</h3><p>La mantención reactiva —esperar a que algo falle para arreglarlo— es cara y disruptiva. Nuestro enfoque es preventivo: monitoreamos, revisamos y actuamos antes de que un problema afecte tu operación.</p><h3>¿Cómo lo hacemos?</h3><ul><li>Monitoreo 24/7 de infraestructura crítica con alertas automáticas</li><li>Revisiones de salud del sistema en intervalos programados</li><li>Actualización de firmware y parches de seguridad</li><li>Análisis de capacidad para anticipar cuellos de botella</li></ul><h3>Resultado</h3><p>Menos incidentes no planificados, menos interrupciones y costos de mantención más predecibles.</p><div style="margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08)"><a href="https://wa.me/56973828553?text=Hola%2C+me+interesa+un+plan+de+mantenci%C3%B3n+preventiva." target="_blank" rel="noopener" onclick="trackEvent(\'click\',\'contacto\',\'whatsapp_modal_c-preventivo\')" style="display:inline-flex;align-items:center;gap:.5rem;background:#25d366;color:#fff;padding:.6rem 1.2rem;border-radius:24px;font-size:.85rem;font-weight:700;text-decoration:none"><i class="fab fa-whatsapp" style="font-size:1rem"></i> Cotizar por WhatsApp</a></div>'},
