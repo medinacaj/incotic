@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://incotic.vercel.app/</loc></url>
+  <url><loc>https://incotic.vercel.app/servicios/infraestructura-ti.html</loc></url>
+  <url><loc>https://incotic.vercel.app/servicios/redes-y-conectividad.html</loc></url>
+  <url><loc>https://incotic.vercel.app/servicios/seguridad-electronica.html</loc></url>
+  <url><loc>https://incotic.vercel.app/servicios/automatizacion.html</loc></url>
+  <url><loc>https://incotic.vercel.app/servicios/domotica.html</loc></url>
+  <url><loc>https://incotic.vercel.app/servicios/inteligencia-artificial.html</loc></url>
+  <url><loc>https://incotic.vercel.app/servicios/informatica.html</loc></url>
 </urlset>
