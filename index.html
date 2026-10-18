@@ -653,6 +653,10 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
   .sec-blob{--w:140px!important;--blur:22px!important;--op:.2!important}
 }
 
+/* saltar al contenido */
+.skip{position:absolute;left:1rem;top:-5rem;z-index:10000;background:#fff;color:#111;padding:.6rem 1rem;border-radius:8px;font-weight:600}
+.skip:focus{top:.6rem}
+
 /* foco de teclado */
 [role="button"]:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 
@@ -671,6 +675,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
 </style>
 </head>
 <body>
+<a href="#inicio" class="skip">Saltar al contenido</a>
 <!-- Scroll progress -->
 <div id="sp"></div>
 
@@ -712,6 +717,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
 <!-- ════════════════════════════════
      HERO
 ════════════════════════════════ -->
+<main id="contenido">
 <section id="inicio">
   <div class="container">
     <div class="hero-inner rv">
@@ -1256,6 +1262,8 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
   </div>
 </section>
 
+</main>
+
 <!-- ════════════════════════════════
      FOOTER
 ════════════════════════════════ -->
@@ -1274,13 +1282,13 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
       <div class="footer-col">
         <h4>Soluciones</h4>
         <ul>
-          <li><a href="#soluciones" onclick="openModal('infra-ti')">Infraestructura TI</a></li>
-          <li><a href="#soluciones" onclick="openModal('redes')">Redes y Conectividad</a></li>
-          <li><a href="#soluciones" onclick="openModal('seguridad')">Seguridad Electrónica</a></li>
-          <li><a href="#soluciones" onclick="openModal('automatizacion')">Automatización</a></li>
-          <li><a href="#soluciones" onclick="openModal('domotica')">Domótica</a></li>
-          <li><a href="#soluciones" onclick="openModal('ia')">Inteligencia Artificial</a></li>
-          <li><a href="#soluciones" onclick="openModal('informatica')">Informática</a></li>
+          <li><a href="servicios/infraestructura-ti.html">Infraestructura TI</a></li>
+          <li><a href="servicios/redes-y-conectividad.html">Redes y Conectividad</a></li>
+          <li><a href="servicios/seguridad-electronica.html">Seguridad Electrónica</a></li>
+          <li><a href="servicios/automatizacion.html">Automatización</a></li>
+          <li><a href="servicios/domotica.html">Domótica</a></li>
+          <li><a href="servicios/inteligencia-artificial.html">Inteligencia Artificial</a></li>
+          <li><a href="servicios/informatica.html">Informática</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1413,8 +1421,8 @@ function animateCounter(el){
 function toggleFaq(btn){
   var item=btn.parentElement;
   var wasOpen=item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open')});
-  if(!wasOpen)item.classList.add('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-q').setAttribute('aria-expanded','false');});
+  if(!wasOpen){item.classList.add('open');btn.setAttribute('aria-expanded','true');}
 }
 
 /* ── Canvas particles + orbs ── */
@@ -1550,6 +1558,7 @@ var MD={
 'privacidad':{icon:'fas fa-user-shield',title:'Política de Privacidad y Protección de Datos',body:'<p style="font-size:.78rem;color:var(--blue);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:1.2rem">INCOTIC &nbsp;|&nbsp; Última actualización: enero de 2025</p><h3>1. Responsable del Tratamiento</h3><p><strong>INCOTIC</strong>, domiciliada en Concepción, Región del Biobío, Chile, es responsable del tratamiento de los datos personales recopilados a través de su sitio web y en el desarrollo de sus servicios.</p><h3>2. Datos que Recopilamos</h3><p>Únicamente los necesarios para la prestación del servicio: (i) identificación: nombre, RUT, cargo y empresa; (ii) contacto: teléfono, email y dirección; (iii) técnicos: información de infraestructura para la prestación del servicio; (iv) navegación: IP y cookies analíticas.</p><h3>3. Finalidad del Tratamiento</h3><p>Exclusivamente para: gestión y facturación de servicios contratados, comunicaciones del proyecto, envío de información comercial (con consentimiento expreso) y cumplimiento de obligaciones legales.</p><h3>4. Derechos del Titular</h3><p>El titular tiene derecho a acceder, rectificar, suprimir u oponerse al tratamiento de sus datos personales. Para ejercer estos derechos, enviar solicitud escrita a <strong>'+EMAIL+'</strong>.</p><h3>5. Conservación y Seguridad</h3><p>Los datos se conservarán el tiempo necesario para cumplir las finalidades descritas y las obligaciones legales aplicables. INCOTIC implementa medidas técnicas y organizativas para garantizar su seguridad.</p><h3>6. Contacto</h3><p>Para consultas sobre protección de datos: <strong>'+EMAIL+'</strong> | Concepción, Chile.</p>'}
 };
 
+var SERVICE_PAGES={'infra-ti':'infraestructura-ti','redes':'redes-y-conectividad','seguridad':'seguridad-electronica','automatizacion':'automatizacion','domotica':'domotica','ia':'inteligencia-artificial','informatica':'informatica'};
 var lastFocus=null;
 function openModal(id){
   var d=MD[id];
@@ -1564,7 +1573,9 @@ function openModal(id){
     +'<h2><i class="'+d.icon+'"></i> '+d.title+'</h2>'
     +'<button class="close-btn" aria-label="Cerrar" onclick="closeModal()">'
     +'<i class="fas fa-xmark"></i></button></div>'
-    +'<div class="modal-body">'+d.body+'</div></div>';
+    +'<div class="modal-body">'+d.body
+    +(SERVICE_PAGES[id]?'<p style="margin-top:1rem"><a href="servicios/'+SERVICE_PAGES[id]+'.html" style="color:var(--blue);font-weight:600">Ver página completa del servicio →</a></p>':'')
+    +'</div></div>';
   document.body.appendChild(el);
   document.body.style.overflow='hidden';
   el.querySelector('.close-btn').focus();
@@ -1599,6 +1610,7 @@ document.addEventListener('click', function(e) {
 /* ── Teclado: elementos con onclick que no son enlaces ni botones ── */
 document.querySelectorAll('div[onclick]').forEach(function(el){
   el.setAttribute('tabindex','0');el.setAttribute('role','button');
+  if(el.classList.contains('faq-q'))el.setAttribute('aria-expanded','false');
   el.addEventListener('keydown',function(e){
     if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}
   });
