@@ -30,19 +30,20 @@ Proyecto: sitio web estático de una sola página (`index.html`) para INCOTIC, e
 - Logo embebido en base64
 - Canvas de partículas + 4 orbes flotantes animados
 - 38+ modales vía `var MD={...}` + `openModal(id)`
-- DIVs: siempre verificar que `<div` count == `</div>` count (actualmente 318)
+- DIVs: siempre verificar que `<div` count == `</div>` count (actualmente 293)
 
 ### Secciones (orden)
 1. `#inicio` — Hero
-2. `#soluciones` — 7 cards
-3. `#por-que` — 6 cards
+2. `#soluciones` — 7 cards (con `.sol-points`: 3 puntos clave visibles)
+3. `#por-que` — 6 comp-cards con modal (fusiona los antiguos "Por qué" y "Compromisos")
 4. `#sectores` — 8 cards
 5. `#metodologia` — 4 pasos
 6. `#testimonios` — 3 testimonios
-7. `#compromisos` — 6 cards
-8. `#partners` — pills de marcas
-9. `#faq` — 5 preguntas
-10. `#contacto` — CTA final
+7. `#partners` — pills de marcas
+8. `#faq` — 5 preguntas
+9. `#contacto` — CTA final
+
+Hero: 4 métricas (proyectos, uptime objetivo, garantía, tiempo de respuesta).
 
 ---
 
@@ -54,7 +55,7 @@ Proyecto: sitio web estático de una sola página (`index.html`) para INCOTIC, e
 --bg3:      #1a1a1a
 --white:    #f5f5f7
 --grey:     #a1a1a6
---grey2:    #6e6e73
+--grey2:    #8e8e93   (cumple contraste AA sobre negro)
 --blue:     #2997ff
 --green:    #30d158
 --line:     rgba(255,255,255,.11)
@@ -85,6 +86,7 @@ Proyecto: sitio web estático de una sola página (`index.html`) para INCOTIC, e
 | `.comp-card p` / `.meto-body p` | `0.85rem` | 400 |
 | `.sol-body p` | `0.87rem` | 400 |
 | `.modal-body` | `0.87rem` | 400 |
+| `.sol-points li` | `0.72rem` | 500 |
 | `.sec-tag` | `0.65rem` | 600 uppercase |
 | `.meto-step` | `0.62rem` | 700 uppercase |
 
@@ -120,7 +122,7 @@ Todos los modales (excepto `tyc` y `privacidad`) terminan con un botón verde:
 | Soluciones (7) | `infra-ti`, `redes`, `seguridad`, `automatizacion`, `domotica`, `ia`, `informatica` |
 | Sectores (8) | `s-hogares`, `s-pymes`, `s-empresas`, `s-locales`, `s-bodegas`, `s-condominios`, `s-industrial`, `s-educacion` |
 | Metodología (4) | `m-diagnostico`, `m-diseno`, `m-implementacion`, `m-monitoreo` |
-| Compromisos (6) | `c-atencion`, `c-confidencialidad`, `c-acompanamiento`, `c-tiempos`, `c-preventivo`, `c-documentacion` |
+| Por qué INCOTIC (6) | `c-integral`, `c-atencion` (incluye confidencialidad), `c-acompanamiento`, `c-tiempos`, `c-preventivo`, `c-documentacion` |
 | Partners (11) | `t-cisco`, `t-hikvision`, `t-mikrotik`, `t-bosch`, `t-ubiquiti`, `t-unifi`, `t-tplink`, `t-dahua`, `t-huawei`, `t-ezviz`, `t-tapo` |
 | Footer (2) | `tyc`, `privacidad` |
 
@@ -194,6 +196,10 @@ md  ≤ 900px  → footer 2 cols, blobs 280px
 ```
 
 **Regla:** cada cambio CSS en desktop tiene su contraparte en el bloque responsive unificado al final del archivo.
+
+**Orden de los bloques:** md (≤900) → sm (≤640) → xs (≤400). El más pequeño va al final para que prevalezca; invertirlo rompe el layout móvil.
+
+**Blobs:** la opacidad efectiva es `var(--op) * .3` (definido en `.sec-blob`). Mantenerlos sutiles.
 
 ---
 
