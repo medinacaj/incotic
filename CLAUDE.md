@@ -1,3 +1,5 @@
+@AGENTS.md
+
 # CLAUDE.md — INCOTIC Sitio Web Corporativo
 
 Proyecto: sitio web estático de una sola página (`index.html`) para INCOTIC, empresa de soluciones tecnológicas en Concepción, Chile.
