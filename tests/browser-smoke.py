@@ -44,7 +44,7 @@ with sync_playwright() as playwright:
     dialog = page.get_by_role("dialog")
     assert dialog.count() == 1 and dialog.is_visible()
     assert dialog.get_attribute("aria-labelledby") == "incotic-modal-title"
-    assert dialog.get_by_role("heading").count() == 1
+    assert dialog.locator("#incotic-modal-title").count() == 1
     dialog.get_by_role("button", name="Cerrar").press("Escape")
     assert dialog.count() == 0
     assert legal.evaluate("(element) => element === document.activeElement"), "Restaurar foco"
