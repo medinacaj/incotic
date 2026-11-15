@@ -30,7 +30,12 @@ for (const slug of SLUGS) {
   check(`Página ${slug} existe`, existsSync(file));
   const s = read(file);
   check(`${slug}: enlazada desde index, en sitemap y con <h1>`, html.includes(`href="${file}"`) && xml.includes(`/${file}</loc>`) && s.includes('<h1'));
-  // GitHub Pages sirve el sitio en /incotic/: las rutas que empiezan con "/" se rompen
+  // Las rutas relativas sirven tanto en github.io/incotic/ como en incotic.com.
   check(`${slug}: sin rutas absolutas a la raíz`, !/(href|src)="\/(?!\/)/.test(s));
 }
+check('CNAME apunta al dominio raíz', existsSync('CNAME') && read('CNAME').trim() === 'incotic.com');
+check('Canonical y og:url usan incotic.com', html.includes('rel="canonical" href="https://incotic.com/"') && html.includes('property="og:url" content="https://incotic.com/"'));
+check('Sitemap y robots usan incotic.com', xml.includes('<loc>https://incotic.com/</loc>') && read('robots.txt').includes('Sitemap: https://incotic.com/sitemap.xml'));
+check('Metadatos sin www antiguo', ![html, xml, read('robots.txt'), ...SLUGS.map(slug => read(`servicios/${slug}.html`))].some(s => s.includes('https://www.incotic.com')));
+check('Los 7 servicios usan canonical de incotic.com', SLUGS.every(slug => read(`servicios/${slug}.html`).includes(`<link rel="canonical" href="https://incotic.com/servicios/${slug}.html">`)));
 console.log('Comprobaciones INCOTIC completadas.');
