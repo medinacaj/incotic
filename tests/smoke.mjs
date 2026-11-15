@@ -19,6 +19,11 @@ check('Responsive en orden md → sm → xs', html.indexOf('/* md ≤ 900px */')
 check('JSON-LD válido', (() => { JSON.parse(html.match(/ld\+json">([\s\S]*?)<\/script>/)[1]); return true; })());
 check('Imágenes con alt', [...html.matchAll(/<img\b[^>]*>/g)].every(m => /\balt="/.test(m[0])));
 check('Logo e imagen OG existen', existsSync('logo.png') && existsSync('og-image.jpg'));
+check('Los controles de privacidad son botones, no enlaces javascript:', !html.includes('href="javascript:void(0)"') &&
+  count(html, /class="footer-modal-action" onclick="openModal\('/g) === 4);
+check('Los diálogos tienen título accesible y trampa de foco Tab/Escape', html.includes("el.setAttribute('aria-labelledby','incotic-modal-title')") &&
+  html.includes('<h2 id="incotic-modal-title">') && html.includes("if(e.key!=='Tab')return;") &&
+  html.includes("if(e.key==='Escape'){e.preventDefault();closeModal();return;}"));
 
 for (const slug of SLUGS) {
   const file = `servicios/${slug}.html`;
