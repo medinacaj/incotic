@@ -28,7 +28,7 @@ Proyecto: sitio web estático de una sola página (`index.html`) para INCOTIC, e
 
 - **Un solo** `index.html` para la portada — sin archivos CSS/JS externos propios
 - Páginas de servicio en `servicios/*.html` (7), con estilos compartidos en `servicios.css`
-  - Publicado en **GitHub Pages** bajo `/incotic/`: usar **rutas relativas** (`../logo.png`, `../index.html#x`), nunca rutas que empiecen con `/`
+  - Publicado en **GitHub Pages** tanto bajo `/incotic/` en github.io como bajo `/` con dominio propio: usar **rutas relativas** (`../logo.png`, `../index.html#x`), nunca rutas que empiecen con `/`
   - Al agregar un servicio: crear la página, enlazarla en el footer de `index.html`, en `SERVICE_PAGES` (JS) y en `sitemap.xml`
 - Pruebas: `node tests/smoke.mjs` (corre también en GitHub Actions, workflow "INCOTIC website QA")
 - Font Awesome 6.5.1 desde CDN Cloudflare
@@ -273,14 +273,14 @@ No mantener aquí una lista paralela de pendientes.
 ## SEO técnico
 
 El sitio incluye:
-- `<link rel="canonical">` apuntando a `https://www.incotic.com/`
+- `<link rel="canonical">` apuntando a `https://incotic.com/`
 - Open Graph (`og:title`, `og:description`, `og:image`, `og:url`)
 - Twitter Cards
 - Schema.org `LocalBusiness` JSON-LD
 - `sitemap.xml` en la raíz
 - `robots.txt` en la raíz
 
-Actualizar canonical y og:url cuando el dominio esté activo.
+Los metadatos ya usan el dominio raíz; validar disponibilidad pública antes de considerarlo activo.
 
 ## Marco legal-tecnológico
 Leer `docs/ASESOR_LEGAL_TECNOLOGICO.md` en tareas con implicaciones legales, datos, IA, derechos de contenido, seguridad, proveedores, contratos o continuidad. Aplicar solo los controles pertinentes y distinguir requisitos jurídicos verificados de buenas prácticas; registrar evidencia, jurisdicción, riesgo y validación pendiente. Coordinar con `AGENTS.md`.
