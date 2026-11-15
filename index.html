@@ -507,8 +507,8 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
 .social-btn:hover{border-color:var(--blue);color:var(--blue);background:rgba(41,151,255,.07)}
 .footer-col h4{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--grey2);margin-bottom:.9rem}
 .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
-.footer-col ul a{font-size:.83rem;color:var(--grey);transition:color .2s}
-.footer-col ul a:hover{color:var(--white)}
+.footer-col ul a,.footer-col ul .footer-modal-action{font-size:.83rem;color:var(--grey);transition:color .2s}
+.footer-col ul a:hover,.footer-col ul .footer-modal-action:hover{color:var(--white)}
 .footer-contact-item{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.65rem}
 .footer-contact-item i{font-size:.78rem;color:var(--blue);margin-top:.18rem;flex-shrink:0}
 .footer-contact-item span{font-size:.82rem;color:var(--grey);line-height:1.5}
@@ -517,9 +517,11 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
   display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
   gap:.7rem;font-size:.76rem;color:var(--grey2);
 }
-.footer-bottom a{color:var(--grey2);transition:color .2s}
-.footer-bottom a:hover{color:var(--white)}
+.footer-bottom a,.footer-bottom button{color:var(--grey2);transition:color .2s}
+.footer-bottom a:hover,.footer-bottom button:hover{color:var(--white)}
 .footer-bottom-links{display:flex;gap:1.1rem;flex-wrap:wrap}
+.footer-modal-action{appearance:none;border:0;background:none;padding:0;font:inherit;text-align:left;cursor:pointer}
+.footer-modal-action:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:2px}
 
 /* ── FLOATING BUTTONS ── */
 .fab-wrap{
@@ -1302,8 +1304,8 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
           <li><a href="#por-que">Por qué INCOTIC</a></li>
           <li><a href="#partners">Tecnologías</a></li>
           <li><a href="#faq">Preguntas Frecuentes</a></li>
-          <li><a href="javascript:void(0)" onclick="openModal('tyc')">Términos y Condiciones</a></li>
-          <li><a href="javascript:void(0)" onclick="openModal('privacidad')">Política de Privacidad</a></li>
+          <li><button type="button" class="footer-modal-action" onclick="openModal('tyc')">Términos y Condiciones</button></li>
+          <li><button type="button" class="footer-modal-action" onclick="openModal('privacidad')">Política de Privacidad</button></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1329,8 +1331,8 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:3rem 0 1.8
     <div class="footer-bottom">
       <span>© <span id="year">2026</span> INCOTIC · Todos los derechos reservados</span>
       <div class="footer-bottom-links">
-        <a href="javascript:void(0)" onclick="openModal('privacidad')">Privacidad</a>
-        <a href="javascript:void(0)" onclick="openModal('tyc')">Términos</a>
+        <button type="button" class="footer-modal-action" onclick="openModal('privacidad')">Privacidad</button>
+        <button type="button" class="footer-modal-action" onclick="openModal('tyc')">Términos</button>
       </div>
     </div>
   </div>
@@ -1571,10 +1573,10 @@ function openModal(id){
   if(old)old.remove();
   var el=document.createElement('div');
   el.className='modal show dyn-modal';
-  el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');
+  el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');el.setAttribute('aria-labelledby','incotic-modal-title');
   lastFocus=document.activeElement;
   el.innerHTML='<div class="modal-box"><div class="modal-hdr">'
-    +'<h2><i class="'+d.icon+'"></i> '+d.title+'</h2>'
+    +'<h2 id="incotic-modal-title"><i class="'+d.icon+'"></i> '+d.title+'</h2>'
     +'<button class="close-btn" aria-label="Cerrar" onclick="closeModal()">'
     +'<i class="fas fa-xmark"></i></button></div>'
     +'<div class="modal-body">'+d.body
@@ -1593,9 +1595,19 @@ function closeModal(){
   document.body.style.overflow='';
   if(lastFocus&&lastFocus.focus)lastFocus.focus();
 }
-/* close on Escape */
+/* Keep keyboard focus inside the active modal and restore the trigger on close. */
 document.addEventListener('keydown',function(e){
-  if(e.key==='Escape')closeModal();
+  var modal=document.querySelector('.dyn-modal');
+  if(!modal)return;
+  if(e.key==='Escape'){e.preventDefault();closeModal();return;}
+  if(e.key!=='Tab')return;
+  var focusables=Array.from(modal.querySelectorAll('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])'))
+    .filter(function(node){return node.getClientRects().length>0;});
+  if(!focusables.length){e.preventDefault();return;}
+  var first=focusables[0],last=focusables[focusables.length-1];
+  if(!modal.contains(document.activeElement)){e.preventDefault();first.focus();return;}
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
 });
 
 /* ── Delegated WA link tracker ── */
