@@ -20,7 +20,7 @@ Proyecto: sitio web estático de una sola página (`index.html`) para INCOTIC, e
 | LinkedIn | https://www.linkedin.com/company/incotic/ |
 | Instagram | https://www.instagram.com/incotic |
 | GA4 | `G-XXXXXXXXXX` (placeholder — configurar antes de publicar) |
-| Dominio | `www.incotic.com` (placeholder — actualizar cuando esté activo) |
+| Dominio | `incotic.com` (dominio canónico propuesto, pendiente de DNS y HTTPS) |
 
 ---
 
@@ -28,7 +28,7 @@ Proyecto: sitio web estático de una sola página (`index.html`) para INCOTIC, e
 
 - **Un solo** `index.html` para la portada — sin archivos CSS/JS externos propios
 - Páginas de servicio en `servicios/*.html` (7), con estilos compartidos en `servicios.css`
-  - Publicado en **GitHub Pages** bajo `/incotic/`: usar **rutas relativas** (`../logo.png`, `../index.html#x`), nunca rutas que empiecen con `/`
+  - Publicado en **GitHub Pages** tanto bajo `/incotic/` en github.io como bajo `/` con dominio propio: usar **rutas relativas** (`../logo.png`, `../index.html#x`), nunca rutas que empiecen con `/`
   - Al agregar un servicio: crear la página, enlazarla en el footer de `index.html`, en `SERVICE_PAGES` (JS) y en `sitemap.xml`
 - Pruebas: `node tests/smoke.mjs` (corre también en GitHub Actions, workflow "INCOTIC website QA")
 - Font Awesome 6.5.1 desde CDN Cloudflare
@@ -267,7 +267,7 @@ Nunca cambiar `display:block` por `display:none` aquí.
 
 - [ ] Reemplazar `G-XXXXXXXXXX` con Measurement ID real de GA4 (variable `GA_ID`; gtag no se carga mientras sea placeholder)
 - [ ] Confirmar si INCOTIC emite facturas / participa en licitaciones antes de volver a mencionarlo
-- [ ] Actualizar dominio `www.incotic.com` en canonical y og:url
+- [ ] Validar dominio `incotic.com`, DNS de Namecheap, GitHub Pages y HTTPS tras publicar
 - [x] Crear `og-image.jpg` (1200×630px) — está en la raíz del repo; subirla junto con `index.html` al publicar
 - [ ] Reemplazar testimonios genéricos con reseñas reales de clientes
 - [ ] Agregar fotos reales de proyectos ejecutados
@@ -282,14 +282,14 @@ Nunca cambiar `display:block` por `display:none` aquí.
 ## SEO técnico
 
 El sitio incluye:
-- `<link rel="canonical">` apuntando a `https://www.incotic.com/`
+- `<link rel="canonical">` apuntando a `https://incotic.com/`
 - Open Graph (`og:title`, `og:description`, `og:image`, `og:url`)
 - Twitter Cards
 - Schema.org `LocalBusiness` JSON-LD
 - `sitemap.xml` en la raíz
 - `robots.txt` en la raíz
 
-Actualizar canonical y og:url cuando el dominio esté activo.
+Los metadatos ya usan el dominio raíz; validar disponibilidad pública antes de considerarlo activo.
 
 ## Marco legal-tecnológico
 Leer `docs/ASESOR_LEGAL_TECNOLOGICO.md` en tareas con implicaciones legales, datos, IA, derechos de contenido, seguridad, proveedores, contratos o continuidad. Aplicar solo los controles pertinentes y distinguir requisitos jurídicos verificados de buenas prácticas; registrar evidencia, jurisdicción, riesgo y validación pendiente. Coordinar con `AGENTS.md`.
