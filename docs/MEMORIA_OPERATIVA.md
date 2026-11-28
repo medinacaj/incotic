@@ -12,12 +12,12 @@ Decisiones confirmadas: `docs/DECISIONES.md`.
 
 ## 1. Estado actual
 
-**Actualizado:** 2026-11-28 · **Base:** `main` @ `c42fddb` (2026-11-15, "Update CNAME")
+**Actualizado:** 2026-11-28 · **Base:** `main` @ `2d915f6` (merge PR #19)
 
 | Aspecto | Estado | Evidencia |
 |---|---|---|
 | Publicación | GitHub Pages desde `main` (raíz). | D-01; workflow de Pages |
-| Dominio | `CNAME` = `incotic.com` en `main`. Canonical, OG, sitemap y robots **aún** dicen `www.incotic.com`. DNS, *Custom domain* y HTTPS **no verificados**. | Issue #16, PR #17 |
+| Dominio | `CNAME` = `incotic.com` en `main`. Canonical, OG, JSON-LD, sitemap y robots pasan a `incotic.com` en PR #20 (pendiente de fusión). DNS, *Custom domain* y HTTPS **no verificados**. | Issue #16, PR #20 |
 | Riesgo dominio | Con `CNAME` activo, GitHub Pages redirige `medinacaj.github.io/incotic/` a `incotic.com`; si el DNS no está listo, el sitio puede no abrir. **No verificado.** | Issue #16 |
 | Pruebas | `tests/smoke.mjs` (estático) y `tests/browser-smoke.py` (Chromium, 8 rutas, 4 anchos) en CI. | `site-qa.yml`, `browser-qa.yml` |
 | Protección de `main` | `protected: false` (sin reglas de rama). | Issue #13 |
@@ -27,15 +27,15 @@ Decisiones confirmadas: `docs/DECISIONES.md`.
 
 | Ref. | Qué es | Estado | Siguiente paso |
 |---|---|---|---|
-| Issue #16 / PR #17 | Dominio `incotic.com` en canonical, sitemap, robots y JSON-LD. | PR #17 **en conflicto** con `main` (CI verde en su SHA `fca8eae`). | Recrear o actualizar el PR desde `main` actual; no forzar. DNS lo configura el responsable (no tocar MX/TXT). |
+| Issue #16 / PR #20 | Dominio `incotic.com` en canonical, OG, JSON-LD, sitemap, robots y 7 servicios. Reemplaza al PR #17 (cerrado, en conflicto). | Rama `fix/dominio-incotic`; pruebas locales OK. | Fusionar con autorización (D-14). Luego el responsable configura DNS según `docs/DOMINIO_NAMECHEAP_GITHUB_PAGES.md` (no tocar MX/TXT). |
 | Issue #13 | Auditoría web v3.0 (WCAG manual, CWV, licencias de imágenes, cabeceras, protección de rama). | Abierta; QA automatizado ya integrado (PR #15). | Atacar tareas P1/P2 pendientes del Issue, una por PR. |
-| PR #18 | README de continuidad. | Incorporado en PR #19 (sus commits quedan incluidos). | Se cierra solo al fusionar ese PR. |
 
 **Ramas antiguas sin PR abierto** (ya fusionadas o descartadas; no reutilizar): `fix/*`, `feat/sombras`,
 `feat/paginas-servicios`, `preview/temas`, `mejora-integral-web-2026-10` (PR #4 cerrado, referencia),
 `claude/beautiful-maxwell-9ac2m2`, `codex/fix-footer-modal-accessibility-20261114` (supersedida por PR #14),
 `codex/incotic-browser-regression-20261115` (supersedida por PR #15), `governance/legal-tech-review-20261018`,
-`chore/multi-ai-handoff-2026-10`.
+`chore/multi-ai-handoff-2026-10`, `docs/readme-continuidad-20261121` (PR #18, fusionado vía #19),
+`docs/memoria-operativa` (PR #19, fusionado), `feat/incotic-gh-pages-custom-domain` (PR #17, reemplazado por PR #20).
 
 ## 3. Bloqueos y pendientes del responsable
 
@@ -51,10 +51,10 @@ Decisiones confirmadas: `docs/DECISIONES.md`.
 
 ## 4. Siguiente acción concreta
 
-**Resolver la alineación de dominio (Issue #16):** crear una rama desde `main`, portar los cambios de
-PR #17 (canonical, OG, JSON-LD, robots, sitemap y páginas de servicio a `https://incotic.com/`), ejecutar
-`node tests/smoke.mjs`, abrir el PR y cerrar el #17 como reemplazado. En paralelo, el responsable
-verifica el DNS.
+1. **Responsable:** autorizar la fusión del PR #20 y configurar el DNS de `incotic.com` siguiendo
+   `docs/DOMINIO_NAMECHEAP_GITHUB_PAGES.md`; luego activar *Enforce HTTPS* en Settings → Pages.
+2. **Agente siguiente:** verificar en navegador real `https://incotic.com/`, las 7 rutas de servicio y la redirección
+   de `www`; registrar la evidencia en el Issue #16 y cerrarlo si cumple. Después, atacar la primera tarea P1 del Issue #13.
 
 ## 5. Verificación rápida
 
@@ -80,12 +80,20 @@ Formato obligatorio de cada entrada — copiar y completar:
 - Siguiente acción:
 ```
 
+### 2026-11-28 · Claude Code · `fix/dominio-incotic` → PR #20
+- **Objetivo:** siguiente acción registrada: alinear el dominio `incotic.com` (Issue #16) sin el conflicto del PR #17.
+- **Cambios:** cherry-pick del commit `fca8eae` del PR #17 (conserva autoría) sobre `main`; conflictos resueltos conservando `CNAME` y la referencia a la memoria en `CLAUDE.md`; canonical, OG, JSON-LD, robots, sitemap y 7 servicios con `https://incotic.com`; 5 comprobaciones nuevas en `tests/smoke.mjs`; guía DNS actualizada (Vercel ya eliminado).
+- **Pruebas:** `node tests/smoke.mjs` → 41/41 OK. `tests/browser-smoke.py` (Chromium local, ejecutado con el Chromium preinstalado del entorno) → OK: 8 rutas, CTA, teclado/diálogo, menú móvil, SEO, 320–1280 px. `grep www.incotic.com` en el sitio → 0 resultados.
+- **Bloqueos:** DNS, *Custom domain* y HTTPS dependen del responsable; no verificables desde el entorno (sin acceso a github.io ni a incotic.com).
+- **Pendiente:** fusión del PR #20 (D-14). PR #17 cerrado como reemplazado.
+- **Siguiente acción:** sección 4.
+
 ### 2026-11-28 · Claude Code · `docs/memoria-operativa` → PR #19
 - **Objetivo:** sistema permanente de memoria y continuidad (pedido del responsable).
 - **Cambios:** crea `docs/MEMORIA_OPERATIVA.md` y `docs/DECISIONES.md`; protocolo obligatorio en `AGENTS.md`; README con arranque rápido (incluye el commit de PR #18); `docs/agent-workflow.md` y `CLAUDE.md` apuntan a la memoria en vez de duplicar pendientes; `tests/smoke.mjs` verifica que la memoria exista y esté enlazada.
 - **Pruebas:** `node tests/smoke.mjs` → OK, 36/36 comprobaciones (3 nuevas de memoria). `browser-smoke.py` NO EJECUTADO: no hay cambios en `index.html` ni en `servicios/`. Sin cambios funcionales en el sitio.
 - **Bloqueos:** no se pudo comprobar DNS ni el sitio publicado (sin acceso de red a github.io desde el entorno).
-- **Pendiente:** fusión del PR #19 (requiere autorización del responsable, D-14).
+- **Pendiente:** ninguno; PR #19 fusionado (`2d915f6`), cerró también el PR #18.
 - **Siguiente acción:** la de la sección 4.
 
 ### 2026-11-15 · Codex/ChatGPT · PR #14, #15; `CNAME`
