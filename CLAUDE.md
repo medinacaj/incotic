@@ -20,7 +20,7 @@ Proyecto: sitio web estático de una sola página (`index.html`) para INCOTIC, e
 | LinkedIn | https://www.linkedin.com/company/incotic/ |
 | Instagram | https://www.instagram.com/incotic |
 | GA4 | `G-XXXXXXXXXX` (placeholder — configurar antes de publicar) |
-| Dominio | `www.incotic.com` (placeholder — actualizar cuando esté activo) |
+| Dominio | `incotic.com` (CNAME en `main`; canonical/DNS en curso — Issue #16, D-11) |
 
 ---
 
@@ -263,19 +263,10 @@ Nunca cambiar `display:block` por `display:none` aquí.
 
 ---
 
-## Pendientes del proyecto
+## Pendientes y estado del proyecto
 
-- [ ] Reemplazar `G-XXXXXXXXXX` con Measurement ID real de GA4 (variable `GA_ID`; gtag no se carga mientras sea placeholder)
-- [ ] Confirmar si INCOTIC emite facturas / participa en licitaciones antes de volver a mencionarlo
-- [ ] Actualizar dominio `www.incotic.com` en canonical y og:url
-- [x] Crear `og-image.jpg` (1200×630px) — está en la raíz del repo; subirla junto con `index.html` al publicar
-- [ ] Reemplazar testimonios genéricos con reseñas reales de clientes
-- [ ] Agregar fotos reales de proyectos ejecutados
-- [ ] Crear perfil de Google My Business
-- [ ] Configurar headers de caché en servidor (nginx/Apache)
-- [ ] Verificar propiedad en Google Search Console
-- [ ] Enviar sitemap.xml desde Google Search Console
-- [ ] Mover logo de base64 a archivo externo `logo.png` (archivo ya creado en la raíz; usado por el JSON-LD)
+Ver `docs/MEMORIA_OPERATIVA.md` (estado, bloqueos, siguiente acción y bitácora) y `docs/DECISIONES.md`.
+No mantener aquí una lista paralela de pendientes.
 
 ---
 
