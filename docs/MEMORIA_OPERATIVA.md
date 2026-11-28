@@ -17,7 +17,7 @@ Decisiones confirmadas: `docs/DECISIONES.md`.
 | Aspecto | Estado | Evidencia |
 |---|---|---|
 | Publicación | GitHub Pages desde `main` (raíz). | D-01; workflow de Pages |
-| Dominio | `CNAME` = `incotic.com` en `main`. Canonical, OG, JSON-LD, sitemap y robots pasan a `incotic.com` en PR __PR__ (pendiente de fusión). DNS, *Custom domain* y HTTPS **no verificados**. | Issue #16, PR __PR__ |
+| Dominio | `CNAME` = `incotic.com` en `main`. Canonical, OG, JSON-LD, sitemap y robots pasan a `incotic.com` en PR #20 (pendiente de fusión). DNS, *Custom domain* y HTTPS **no verificados**. | Issue #16, PR #20 |
 | Riesgo dominio | Con `CNAME` activo, GitHub Pages redirige `medinacaj.github.io/incotic/` a `incotic.com`; si el DNS no está listo, el sitio puede no abrir. **No verificado.** | Issue #16 |
 | Pruebas | `tests/smoke.mjs` (estático) y `tests/browser-smoke.py` (Chromium, 8 rutas, 4 anchos) en CI. | `site-qa.yml`, `browser-qa.yml` |
 | Protección de `main` | `protected: false` (sin reglas de rama). | Issue #13 |
@@ -27,7 +27,7 @@ Decisiones confirmadas: `docs/DECISIONES.md`.
 
 | Ref. | Qué es | Estado | Siguiente paso |
 |---|---|---|---|
-| Issue #16 / PR __PR__ | Dominio `incotic.com` en canonical, OG, JSON-LD, sitemap, robots y 7 servicios. Reemplaza al PR #17 (cerrado, en conflicto). | Rama `fix/dominio-incotic`; pruebas locales OK. | Fusionar con autorización (D-14). Luego el responsable configura DNS según `docs/DOMINIO_NAMECHEAP_GITHUB_PAGES.md` (no tocar MX/TXT). |
+| Issue #16 / PR #20 | Dominio `incotic.com` en canonical, OG, JSON-LD, sitemap, robots y 7 servicios. Reemplaza al PR #17 (cerrado, en conflicto). | Rama `fix/dominio-incotic`; pruebas locales OK. | Fusionar con autorización (D-14). Luego el responsable configura DNS según `docs/DOMINIO_NAMECHEAP_GITHUB_PAGES.md` (no tocar MX/TXT). |
 | Issue #13 | Auditoría web v3.0 (WCAG manual, CWV, licencias de imágenes, cabeceras, protección de rama). | Abierta; QA automatizado ya integrado (PR #15). | Atacar tareas P1/P2 pendientes del Issue, una por PR. |
 
 **Ramas antiguas sin PR abierto** (ya fusionadas o descartadas; no reutilizar): `fix/*`, `feat/sombras`,
@@ -35,7 +35,7 @@ Decisiones confirmadas: `docs/DECISIONES.md`.
 `claude/beautiful-maxwell-9ac2m2`, `codex/fix-footer-modal-accessibility-20261114` (supersedida por PR #14),
 `codex/incotic-browser-regression-20261115` (supersedida por PR #15), `governance/legal-tech-review-20261018`,
 `chore/multi-ai-handoff-2026-10`, `docs/readme-continuidad-20261121` (PR #18, fusionado vía #19),
-`docs/memoria-operativa` (PR #19, fusionado), `feat/incotic-gh-pages-custom-domain` (PR #17, reemplazado por PR __PR__).
+`docs/memoria-operativa` (PR #19, fusionado), `feat/incotic-gh-pages-custom-domain` (PR #17, reemplazado por PR #20).
 
 ## 3. Bloqueos y pendientes del responsable
 
@@ -51,7 +51,7 @@ Decisiones confirmadas: `docs/DECISIONES.md`.
 
 ## 4. Siguiente acción concreta
 
-1. **Responsable:** autorizar la fusión del PR __PR__ y configurar el DNS de `incotic.com` siguiendo
+1. **Responsable:** autorizar la fusión del PR #20 y configurar el DNS de `incotic.com` siguiendo
    `docs/DOMINIO_NAMECHEAP_GITHUB_PAGES.md`; luego activar *Enforce HTTPS* en Settings → Pages.
 2. **Agente siguiente:** verificar en navegador real `https://incotic.com/`, las 7 rutas de servicio y la redirección
    de `www`; registrar la evidencia en el Issue #16 y cerrarlo si cumple. Después, atacar la primera tarea P1 del Issue #13.
@@ -80,12 +80,12 @@ Formato obligatorio de cada entrada — copiar y completar:
 - Siguiente acción:
 ```
 
-### 2026-11-28 · Claude Code · `fix/dominio-incotic` → PR __PR__
+### 2026-11-28 · Claude Code · `fix/dominio-incotic` → PR #20
 - **Objetivo:** siguiente acción registrada: alinear el dominio `incotic.com` (Issue #16) sin el conflicto del PR #17.
 - **Cambios:** cherry-pick del commit `fca8eae` del PR #17 (conserva autoría) sobre `main`; conflictos resueltos conservando `CNAME` y la referencia a la memoria en `CLAUDE.md`; canonical, OG, JSON-LD, robots, sitemap y 7 servicios con `https://incotic.com`; 5 comprobaciones nuevas en `tests/smoke.mjs`; guía DNS actualizada (Vercel ya eliminado).
 - **Pruebas:** `node tests/smoke.mjs` → 41/41 OK. `tests/browser-smoke.py` (Chromium local, ejecutado con el Chromium preinstalado del entorno) → OK: 8 rutas, CTA, teclado/diálogo, menú móvil, SEO, 320–1280 px. `grep www.incotic.com` en el sitio → 0 resultados.
 - **Bloqueos:** DNS, *Custom domain* y HTTPS dependen del responsable; no verificables desde el entorno (sin acceso a github.io ni a incotic.com).
-- **Pendiente:** fusión del PR __PR__ (D-14). PR #17 cerrado como reemplazado.
+- **Pendiente:** fusión del PR #20 (D-14). PR #17 cerrado como reemplazado.
 - **Siguiente acción:** sección 4.
 
 ### 2026-11-28 · Claude Code · `docs/memoria-operativa` → PR #19
