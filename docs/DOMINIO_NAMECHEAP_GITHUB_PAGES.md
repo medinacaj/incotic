@@ -2,13 +2,13 @@
 
 **Meta:** publicar la página de GitHub Pages en `https://incotic.com/` manteniendo exactamente ese dominio en el navegador. No utilizar redirección, iframe, URL masking ni forwarding hacia `github.io`.
 
-El repositorio publica archivos estáticos en raíz de `main`. Este PR añade `CNAME` con `incotic.com` y cambia metadatos SEO de `www.incotic.com` al dominio raíz.
+El repositorio publica archivos estáticos en raíz de `main`. `CNAME` ya contiene `incotic.com` y los metadatos SEO (canonical, Open Graph, JSON-LD, robots y sitemap) usan el dominio raíz.
 
 ## 1. Revisar nameservers antes de tocar DNS
 
 En Namecheap: **Domain List → incotic.com → Manage → Domain → Nameservers**. Si se usan **Namecheap BasicDNS, PremiumDNS o FreeDNS**, los registros se gestionan en **Advanced DNS → Host Records**. Si hay nameservers de Cloudflare, hosting u otro proveedor, editar la zona DNS donde apunten, no en Advanced DNS de Namecheap.
 
-Verificar registros existentes y hosting actual (la ficha de GitHub todavía indica `https://incotic.vercel.app`). No eliminar configuración de producción sin tener un plan de reversión.
+Verificar registros existentes y hosting actual. El proyecto de Vercel fue eliminado (2026-10-19); si el dominio aún apunta a Vercel, cambiarlo. Revisar también el campo *Website* del repositorio en GitHub. No eliminar configuración de producción sin tener un plan de reversión.
 
 ## 2. Configurar registros DNS
 
