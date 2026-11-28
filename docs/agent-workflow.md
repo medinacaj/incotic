@@ -5,7 +5,7 @@ Versión: 2026-10-19. **Alcance:** colaboración por tareas, sin orquestación a
 1. Identificar repositorio, rama predeterminada real, Issue y SHA actual; no asumir que se llama `main`.
 2. Leer `AGENTS.md` y el Issue. Consultar `CLAUDE.md`, la arquitectura y la documentación especializada **solo si aportan instrucciones relevantes**. Las instrucciones particulares y de seguridad del proyecto prevalecen sobre este protocolo genérico.
 3. Antes de modificar, identificar archivos afectados y criterios de aceptación; revisar primero el diff y pruebas relacionadas. Evitar leer todo el repositorio o copiar chats anteriores.
-4. Mantener decisiones duraderas en documentación existente; tareas, evidencias y pendientes en Issues/PR. No duplicar el estado vivo en varios archivos Markdown.
+4. Mantener decisiones duraderas en `docs/DECISIONES.md`; tareas, evidencias y pendientes en Issues/PR. El único resumen de estado vivo es `docs/MEMORIA_OPERATIVA.md`, que enlaza (no copia) Issues y PRs; no crear otros Markdown de estado.
 
 ## Roles por defecto (intercambiables según tarea)
 - **ChatGPT/Codex — implementador:** una tarea delimitada, rama específica, cambios mínimos, pruebas y PR.

@@ -19,6 +19,12 @@ check('Responsive en orden md → sm → xs', html.indexOf('/* md ≤ 900px */')
 check('JSON-LD válido', (() => { JSON.parse(html.match(/ld\+json">([\s\S]*?)<\/script>/)[1]); return true; })());
 check('Imágenes con alt', [...html.matchAll(/<img\b[^>]*>/g)].every(m => /\balt="/.test(m[0])));
 check('Logo e imagen OG existen', existsSync('logo.png') && existsSync('og-image.jpg'));
+
+// Memoria operativa: el repositorio debe permitir retomar el trabajo sin depender de un chat
+const MEM = 'docs/MEMORIA_OPERATIVA.md', DEC = 'docs/DECISIONES.md';
+check('Memoria operativa y registro de decisiones existen', existsSync(MEM) && existsSync(DEC));
+check('AGENTS.md obliga a usar la memoria', /MEMORIA_OPERATIVA\.md/.test(read('AGENTS.md')) && /DECISIONES\.md/.test(read('AGENTS.md')));
+check('Memoria con estado, siguiente acción y bitácora', ['## 1. Estado actual', '## 4. Siguiente acción concreta', '## 6. Bitácora'].every(h => read(MEM).includes(h)));
 check('Los controles de privacidad son botones, no enlaces javascript:', !html.includes('href="javascript:void(0)"') &&
   count(html, /class="footer-modal-action" onclick="openModal\('/g) === 4);
 check('Los diálogos tienen título accesible y trampa de foco Tab/Escape', html.includes("el.setAttribute('aria-labelledby','incotic-modal-title')") &&
