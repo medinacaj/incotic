@@ -29,7 +29,7 @@ Decisiones confirmadas: `docs/DECISIONES.md`.
 |---|---|---|---|
 | Issue #16 / PR #17 | Dominio `incotic.com` en canonical, sitemap, robots y JSON-LD. | PR #17 **en conflicto** con `main` (CI verde en su SHA `fca8eae`). | Recrear o actualizar el PR desde `main` actual; no forzar. DNS lo configura el responsable (no tocar MX/TXT). |
 | Issue #13 | Auditoría web v3.0 (WCAG manual, CWV, licencias de imágenes, cabeceras, protección de rama). | Abierta; QA automatizado ya integrado (PR #15). | Atacar tareas P1/P2 pendientes del Issue, una por PR. |
-| PR #18 | README de continuidad. | Incorporado en el PR de memoria operativa (sus commits quedan incluidos). | Se cierra solo al fusionar ese PR. |
+| PR #18 | README de continuidad. | Incorporado en PR #19 (sus commits quedan incluidos). | Se cierra solo al fusionar ese PR. |
 
 **Ramas antiguas sin PR abierto** (ya fusionadas o descartadas; no reutilizar): `fix/*`, `feat/sombras`,
 `feat/paginas-servicios`, `preview/temas`, `mejora-integral-web-2026-10` (PR #4 cerrado, referencia),
@@ -80,12 +80,12 @@ Formato obligatorio de cada entrada — copiar y completar:
 - Siguiente acción:
 ```
 
-### 2026-11-28 · Claude Code · `docs/memoria-operativa` → PR (ver GitHub)
+### 2026-11-28 · Claude Code · `docs/memoria-operativa` → PR #19
 - **Objetivo:** sistema permanente de memoria y continuidad (pedido del responsable).
 - **Cambios:** crea `docs/MEMORIA_OPERATIVA.md` y `docs/DECISIONES.md`; protocolo obligatorio en `AGENTS.md`; README con arranque rápido (incluye el commit de PR #18); `docs/agent-workflow.md` y `CLAUDE.md` apuntan a la memoria en vez de duplicar pendientes; `tests/smoke.mjs` verifica que la memoria exista y esté enlazada.
 - **Pruebas:** `node tests/smoke.mjs` → OK, 36/36 comprobaciones (3 nuevas de memoria). `browser-smoke.py` NO EJECUTADO: no hay cambios en `index.html` ni en `servicios/`. Sin cambios funcionales en el sitio.
 - **Bloqueos:** no se pudo comprobar DNS ni el sitio publicado (sin acceso de red a github.io desde el entorno).
-- **Pendiente:** fusión del PR (requiere autorización del responsable, D-14).
+- **Pendiente:** fusión del PR #19 (requiere autorización del responsable, D-14).
 - **Siguiente acción:** la de la sección 4.
 
 ### 2026-11-15 · Codex/ChatGPT · PR #14, #15; `CNAME`
